@@ -36,4 +36,20 @@ int			ft_do_this(int x, int y, int r, int rx, int ry);
 */
 
 int			ft_square(t_data *img, int x, int y, int size);
+
+/*
+**		TRIANGLE
+*/
+
+int			ft_triangle(t_data *img, int x, int y, int size);
+int			ft_triangle1(t_data *img, int x, int y, int size);
+
+/*
+**		HEXAGON
+*/
+
+int			ft_hex1(t_data *img, int x, int y, int size);
+int			ft_hex(t_data *img, int x, int y, int size);
+int			ft_hex3(t_data *img, int x, int y, int size);
+int			ft_hex2(t_data *img, int x, int y, int size);
 #endif

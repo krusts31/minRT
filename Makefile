@@ -20,7 +20,7 @@ LIB = -Lminilibx -lmlx -framework OpenGL -framework AppKit
 PRINTF = -Lft_printf -lftprintf
 
 SRC = main.c gnl/get_next_line.c gnl/get_next_line_utils.c pixel.c circle.c \
-	square.c
+	square.c triangle.c hexagon.c
 
 SRC_OBJ = $(SRC:.c=.o)
 
