@@ -1,0 +1,5 @@
+Mmain	main.c	/^int     main()$/
+ft_exit	main.c	/^int	ft_exit(int key, t_window *win)$/
+ft_put_pixel	main.c	/^void	ft_put_pixel(t_img *img, int x, int y, unsign/
+t_img	main.c	/^}		t_img;$/
+t_window	main.c	/^}		t_window;$/

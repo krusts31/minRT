@@ -1,0 +1,8 @@
+1. Harms and  tutorial https://harm-smits.github.io/42docs/libs/minilibx
+2. Monte Carlo method.
+3. BIES UN UBNIESED RAY TRACING. https://graphics.stanford.edu/courses/cs348b-01/lectures/lecture16/biasedmc.pdf
+
+Terms:
+	Corss product: is a the mutiplication of 2 vectros, that are inrependent at the result is the 3rd indip. / not the same as dot product
+		so it is a way to get the 3d dimensional assis form any 2 vecotres 
+	Linear independence: if the one vectror cant be replecated by any combination of vector 2 then it is independent
