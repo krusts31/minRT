@@ -6,3 +6,23 @@ Terms:
 	Corss product: is a the mutiplication of 2 vectros, that are inrependent at the result is the 3rd indip. / not the same as dot product
 		so it is a way to get the 3d dimensional assis form any 2 vecotres 
 	Linear independence: if the one vectror cant be replecated by any combination of vector 2 then it is independent
+
+how to rotate?
+how to draw a line?
+how to create linear gradient?
+
+https://github.com/VBrazhnik/FdF/wiki
+
+dot product:
+	is the projection of a vector on to a nother vector in mat terms the cordinats of the same type get multiplied
+
+https://raytracing.github.io/books/RayTracingInOneWeekend.html
+
+formula for reflection
+https://en.wikipedia.org/wiki/Orthogonal_matrix
+Affine Transformations
+	the the one of the plais stay paralle to other planes
+Shear matrix:
+	used to multiply or subtract row from row or colum from column
+	its done by using identity matrix and replacing one zero value
+	with a non zero value

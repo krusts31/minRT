@@ -12,7 +12,7 @@
 
 NAME = a.out
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -Ofast -O3
 
 HEADER = ft_printf.h
 
@@ -20,7 +20,8 @@ LIB = -Lminilibx -lmlx -framework OpenGL -framework AppKit
 PRINTF = -Lft_printf -lftprintf
 
 SRC = main.c gnl/get_next_line.c gnl/get_next_line_utils.c pixel.c circle.c \
-	square.c triangle.c hexagon.c
+	square.c triangle.c hexagon.c bersenhams.c colors.c vector.c \
+	vector_1.c ray.c vector_2.c hit_list.c sphere.c camera.c
 
 SRC_OBJ = $(SRC:.c=.o)
 

@@ -1,5 +1,11 @@
 Mmain	main.c	/^int     main()$/
-ft_exit	main.c	/^int	ft_exit(int key, t_window *win)$/
-ft_put_pixel	main.c	/^void	ft_put_pixel(t_img *img, int x, int y, unsign/
-t_img	main.c	/^}		t_img;$/
-t_window	main.c	/^}		t_window;$/
+drawCircle	circle.c	/^void drawCircle(t_data *img,int xc, int yc, int x,/
+ft_hex	hexagon.c	/^int	ft_hex(t_data *img, int x, int y, int size)$/
+ft_hex1	hexagon.c	/^int	ft_hex1(t_data *img, int x, int y, int size)$/
+ft_hex2	hexagon.c	/^int	ft_hex2(t_data *img, int x, int y, int size)$/
+ft_hex3	hexagon.c	/^int	ft_hex3(t_data *img, int x, int y, int size)$/
+ft_square	square.c	/^int	ft_square(t_data *img, int x, int y, int size)/
+ft_triangle	triangle.c	/^int	ft_triangle(t_data *img, int x, int y, int siz/
+ft_triangle1	triangle.c	/^int	ft_triangle1(t_data *img, int x, int y, int si/
+my_mlx_pixel_put	pixel.c	/^void            my_mlx_pixel_put(t_data *data, int/
+t_data	minRT.h	/^}		t_data;$/

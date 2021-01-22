@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <math.h>
+
+/*
+**	the take away is that dot product is the m same as multiplaying 2 vecotrs;:X
+*/
+int	main()
+{
+	float	x;
+	float	y;
+	float	z;
+	float	len;
+
+	x = 5;
+	y = 7;
+	z = 2;
+	len = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+	if (len > 0)
+	{
+		float invLen;
+
+		invLen = 1 / len;
+		x *=invLen;
+		y *=invLen;
+		z *=invLen;
+		printf("len: %f\ninvLen: %f\nx: %f y: %f z: %f\n",len, invLen, x, y, z);
+	}
+	return (0);
+}
