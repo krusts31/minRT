@@ -13,3 +13,20 @@ t_vec	*vec_minus_vec(t_vec *v1, t_vec *v2)
 	return (new);
 }
 
+float	length_of_vector_pow2(t_vec *self)
+{
+	return (pow(self->e[0], 2) + pow(self->e[1], 2) + pow(self->e[2], 2));
+}
+
+t_vec	*vec_copy(t_vec *src)
+{
+	t_vec	*dest;
+
+	dest = malloc(sizeof(t_vec) * 1);
+	if (dest == NULL)
+		return (NULL);
+	dest->e[0] = src->e[0];
+	dest->e[1] = src->e[1];
+	dest->e[2] = src->e[2];
+	return (dest);
+}

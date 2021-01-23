@@ -48,8 +48,14 @@ t_ray	*get_ray(float u, float v, t_camera *cam)
 	if (tmp1 == NULL)
 		return (NULL);
 	sum_lower_hor = vec_plus_vec(cam->lower_left_corner, tmp);
+	if (sum_lower_hor == NULL)
+		return (NULL);
 	diff_ver_origin = vec_minus_vec(tmp1, cam->origin);	
+	if (diff_ver_origin == NULL)
+		return (NULL);
 	fin = vec_plus_vec(sum_lower_hor, diff_ver_origin);
+	if (fin == NULL)
+		return (NULL);
 	free(sum_lower_hor);
 	free(diff_ver_origin);
 	new = new_ray(cam->origin, fin);

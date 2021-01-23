@@ -3,11 +3,74 @@
 /*
 **		MAKE A STRUCT FOT THE VARIBLES
 **		POSSIBLY DO THAT FOR EVERY FUNCTION
-**		I ADD * 4 A IN LINE 24
-**		A / 2 LINT 28 AND 37 AND IT FIXED THE CODE NO IDEA WHY..
 */
 
-int	hit_sphere(t_ray *ray, float t_min, float t_max, t_hit *hit, t_sphere *sphere)
+static t_vec		*free_rand(t_sphere_difuse_var **var)
+{
+	free((*var)->one);
+	free((*var)->rand);
+	free((*var)->tmp);
+	free((*var)->point);
+	free(*var);
+	return (NULL);
+}
+
+static void		set_rand(t_sphere_difuse_var **var)
+{
+	(*var)->one = NULL;
+	(*var)->rand = NULL;
+	(*var)->point = NULL;
+	(*var)->tmp = NULL;
+}
+
+static t_vec		*compute_rand(t_sphere_difuse_var **var)
+{
+	t_vec	*temp;
+
+	(*var)->rand = new_vector(drand48(), drand48(), drand48());
+	if ((*var)->rand == NULL)
+		return (NULL);
+	(*var)->tmp = vec_times_num((*var)->rand, 2.0);
+	if ((*var)->tmp == NULL)
+		return (NULL);
+	free((*var)->rand);
+	(*var)->rand = (*var)->tmp;
+	(*var)->tmp = NULL;
+	temp = vec_minus_vec((*var)->rand, (*var)->one);
+	if (temp == NULL)
+		return (NULL);
+	free((*var)->rand);
+	(*var)->rand = NULL;
+	return (temp);
+}
+
+t_vec			*rand_in_unit_sphere()
+{
+	t_sphere_difuse_var	*var;
+	t_vec			*ret;
+
+	var = malloc(sizeof(t_sphere_difuse_var) * 1);
+	if (var == NULL)
+		return (NULL);
+	set_rand(&var);
+	var->one = new_vector(1.0, 1.0, 1.0);
+	if (var->one == NULL)
+		return (free_rand(&var));
+	var->point = compute_rand(&var);
+	if (var->point == NULL)
+		return (free_rand(&var));
+	while (length_of_vector_pow2(var->point) >= 1.0)
+	{
+		var->point = compute_rand(&var);
+		if (var->point == NULL)
+			return (free_rand(&var));
+	}
+	ret = vec_copy(var->point);
+	free_rand(&var);
+	return (ret);
+}
+
+int			hit_sphere(t_ray *ray, float t_min, float t_max, t_hit *hit, t_sphere *sphere)
 {
 	t_vec	*test;
 	t_vec	*oc;

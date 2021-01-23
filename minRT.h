@@ -56,6 +56,16 @@ typedef struct		s_hit_list
 	t_sphere	**list;
 }			t_hit_list;
 
+typedef	struct		s_sphere_difuse_var
+{
+	t_vec	*point;
+	t_vec	*rand;
+	t_vec	*one;
+	t_vec	*tmp;
+}			t_sphere_difuse_var;
+
+t_vec     *rand_in_unit_sphere();
+
 /*
 **	CAMERA STRCUCT
 */
@@ -76,6 +86,7 @@ void		*free_camera(t_camera **camera);
 **		VECTOR FUNTIONS
 */
 
+t_vec			*vec_copy(t_vec *src);
 float			length_of_vector(t_vec *slef);
 t_vec			*cross_vector(t_vec *v1, t_vec *v2);
 float			dot_vector(t_vec *v1, t_vec *v2);
@@ -86,6 +97,7 @@ t_vec			*new_vector(float num1, float num2, float num3);
 t_vec			*unit_vec(t_vec *v);
 t_vec			*vec_div_num(t_vec *v1, float num);
 t_vec			*vec_minus_vec(t_vec *v1, t_vec *v2);
+float			length_of_vector_pow2(t_vec *self);
 
 /*
 **		RAY FUNTIONS

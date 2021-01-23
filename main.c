@@ -13,22 +13,34 @@ static t_vec	*color(t_ray *ray, t_hit_list *hit_list)
 	float	t;
 	t_vec	*new;
 	t_vec	*new1;
-	t_vec	*new2;
 	t_vec	*ret;
 	t_vec	*tmp;
+	t_vec	*random;
+	t_ray	*new_r;
+	t_vec	*some_vec;
 
 	hit = malloc(sizeof(t_hit) * 1);
 	if (hit == NULL)
 		return (NULL);
 	if (hitable_list(ray, 0.0, FLT_MAX, &hit, hit_list))
 	{
-		new = vec_plus_num(hit->normal, 1);
+		new = vec_plus_vec(hit->normal, hit->p);
 		if (new == NULL)
 			return (NULL);
-		new2 = vec_times_num(new, 0.5);
-		if (new2 == NULL)
+		random = vec_plus_vec(new, rand_in_unit_sphere());
+		free(new);
+		if (random == NULL)
 			return (NULL);
-		return (new2);
+		some_vec = vec_minus_vec(random, hit->p);
+		free(random);
+		new_r = new_ray(hit->p, some_vec);
+		if (new_r == NULL)
+		{
+			free(hit);
+			free(new);
+			return (NULL);
+		}
+		return (vec_times_num(color(new_r, hit_list), 0.5));		
 	}
 	else
 	{
@@ -62,26 +74,33 @@ static void	*draw_back_ground(t_data *img, t_camera *camera, t_hit_list *list)
 	t_ray	*ray;
 	t_vec	*col;
 	t_vec	*p;
+	t_vec	*new_col;
 
 	int	x;
 	int	y;
 	int	ret;
 	int	t;
 	int	ns;
-	
+
 	float	u;
 	float	v;
 
-	
+
 	t = 0;
-	x = 1280;
-	y = 720;
-	ns = 20;
+	x = 200;
+	y = 100;
+/*
+**	NS is resposible for anti aliasing which is bonus behavoiur
+**	disable it for now becaus it slows down redering or set it to 1
+*/
+	ns = 100;
 	for (int j = y - 1; j >= 0; j--)
 	{
 		for (int i = 0; i < x; i++)
 		{
 			col = new_vector(0.0, 0.0, 0.0);
+			if (col == NULL)
+				return (NULL);
 			for (int s = 0; s < ns; s++)
 			{
 				u = (i + drand48()) / x;
@@ -93,9 +112,12 @@ static void	*draw_back_ground(t_data *img, t_camera *camera, t_hit_list *list)
 				col = vec_plus_vec(col, color(ray, list));
 			}
 			col = vec_div_num(col, (float)ns); 
-			int ir = (int)255.99 * col->e[0];
-			int ig = (int)255.99 * col->e[1];
-			int ib = (int)255.99 * col->e[2];
+			new_col = new_vector(sqrt(col->e[0]), sqrt(col->e[1]), sqrt(col->e[2]));
+			if (new_col == NULL)
+				return (NULL);
+			int ir = (int)255.99 * new_col->e[0];
+			int ig = (int)255.99 * new_col->e[1];
+			int ib = (int)255.99 * new_col->e[2];
 			ret = create_trgb(t, ir, ig, ib);
 			if (ret < 0)
 				ret = -ret;
