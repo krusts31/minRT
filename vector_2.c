@@ -30,3 +30,9 @@ t_vec	*vec_copy(t_vec *src)
 	dest->e[2] = src->e[2];
 	return (dest);
 }
+/*
+void	ft_vec_times_num(t_vec *col)
+{
+
+}
+*/

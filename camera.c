@@ -21,10 +21,10 @@ t_camera	*new_camera()
 	new->origin = NULL;
 	new->horizontal = NULL;
 	new->vertical = NULL;
-	new->lower_left_corner = new_vector(-2.0, -1.0, -1.0);
+	new->lower_left_corner = new_vector(2.0, 1.0, -1.0);
 	new->origin = new_vector(0.0, 0.0, 0.0);
-	new->horizontal = new_vector(4.0, 0.0, 0.0);
-	new->vertical  = new_vector(0.0, 2.0, 0.0);
+	new->horizontal = new_vector(-4.0, 0.0, 0.0);
+	new->vertical  = new_vector(0.0, -2.0, 0.0);
 	if (!new->lower_left_corner || !new->origin)
 		return (free_camera(&new));
 	if (!new->horizontal || !new->vertical)
