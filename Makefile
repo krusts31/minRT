@@ -12,7 +12,7 @@
 
 NAME = a.out
 
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address  -Ofast -O3 
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -Ofast -O3 
 HEADER = ft_printf.h
 
 LIB = -Lminilibx -lmlx -framework OpenGL -framework AppKit

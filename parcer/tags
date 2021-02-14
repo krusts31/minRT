@@ -1,0 +1,51 @@
+Mmain	main.c	/^int	main(int argc, char **argv)$/
+error	main.c	/^short	error(t_pars_vars **vars, short ret, t_task /
+error_con	main.c	/^void	error_con(t_pars_vars **vars, t_task **task)$/
+free_cy	main.c	/^void	free_cy(t_task **task)$/
+free_light	main.c	/^void	free_light(t_task **task)$/
+free_pl	main.c	/^void	free_pl(t_task **task)$/
+free_sp	main.c	/^void	free_sp(t_task **task)$/
+free_sq	main.c	/^void	free_sq(t_task **task)$/
+free_tr	main.c	/^void	free_tr(t_task **task)$/
+ft_Amb_con	main.c	/^char	ft_Amb_con(t_task **task, t_pars_vars **vars,/
+ft_Amb_con1	main.c	/^char	ft_Amb_con1(t_task **task, t_pars_vars **vars/
+ft_Amb_con2	main.c	/^char	ft_Amb_con2(t_task **task, t_pars_vars **vars/
+ft_atof	utils.c	/^float	ft_atof(const char *nptr)$/
+ft_atof_con	utils.c	/^float	ft_atof_con(const char *nptr, float res, flo/
+ft_camera_con	camera2.c	/^char	ft_camera_con(t_camera **camera, t_pars_vars /
+ft_camera_con1	camera2.c	/^char	ft_camera_con1(t_camera **camera, t_pars_vars/
+ft_camera_con2	camera2.c	/^char	ft_camera_con2(t_camera **camera, t_pars_vars/
+ft_camera_con3	camera2.c	/^char	ft_camera_con3(t_camera **camera, t_pars_vars/
+ft_camera_con4	camera2.c	/^char	ft_camera_con4(t_camera **camera, t_pars_vars/
+ft_camera_con5	camera3.c	/^char	ft_camera_con5(t_camera **camera, t_pars_vars/
+ft_camera_con6	camera3.c	/^char	ft_camera_con6(t_camera **camera, t_pars_vars/
+ft_check_Amb	main.c	/^char	ft_check_Amb(char hit, char hit_dig, char b_c/
+ft_check_Amb2	main.c	/^char	ft_check_Amb2(char hit_dig, t_pars_vars **var/
+ft_check_camera	camera4.c	/^char	ft_check_camera(char hit, char hit_dig, char /
+ft_check_camera2	camera.c	/^char	ft_check_camera2(char hit_dig, t_pars_vars **/
+ft_check_float	utils.c	/^float	ft_check_float(const char *nptr, float res, /
+ft_check_res	main.c	/^char	ft_check_res(char hit, char hit_dig, char b_c/
+ft_isfloat	utils.c	/^size_t	ft_isfloat(char fl)$/
+ft_lstadd_back_c	camera.c	/^void		ft_lstadd_back_c(t_camera **lst, t_camera *n/
+ft_lstlast_c	camera.c	/^t_camera	*ft_lstlast_c(t_camera *lst)$/
+ft_new_camera	camera.c	/^t_camera	*ft_new_camera()$/
+ft_parc_Amb	main.c	/^char	ft_parc_Amb(t_task **task, t_pars_vars **vars/
+ft_parc_camera	camera.c	/^char	ft_parc_camera(t_task **task, t_pars_vars **v/
+ft_parc_res	main.c	/^char	ft_parc_res(t_task **task, t_pars_vars **vars/
+ft_parce_args	main.c	/^int	ft_parce_args(t_task **task, t_pars_vars **var/
+ft_parce_args2	main.c	/^char	ft_parce_args2(t_task **task, t_pars_vars **v/
+ft_res_con	main.c	/^char	ft_res_con(t_task **task, t_pars_vars **vars,/
+ft_size_t_len	main.c	/^size_t	ft_size_t_len(size_t nr)$/
+if	main.c	/^\/\/if (!ft_strchr("-0123456789.,RAclpsqcytr \\n",/
+init	main.c	/^char	init(t_task **task, t_pars_vars **vars)$/
+init_task	main.c	/^char	init_task(t_task **task)$/
+t_amb_light	parcer.h	/^}			t_amb_light;$/
+t_camera	parcer.h	/^}			t_camera;$/
+t_cy	parcer.h	/^}			t_cy;$/
+t_light	parcer.h	/^}			t_light;$/
+t_pars_vars	parcer.h	/^}			t_pars_vars;$/
+t_pl	parcer.h	/^}			t_pl;$/
+t_sp	parcer.h	/^}			t_sp;$/
+t_sq	parcer.h	/^}			t_sq;$/
+t_task	parcer.h	/^}			t_task;$/
+t_tr	parcer.h	/^}			t_tr;$/

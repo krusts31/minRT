@@ -21,75 +21,75 @@ static t_vec	*color(t_ray *ray, t_hit_list *hit_list)
 	iter = 0;
 	while (1)
 	{
-	if (!init_col_var(&var))
-		return (NULL);
-	var->hit = malloc(sizeof(t_hit) * 1);
-	if (var->hit == NULL)
-		return (NULL);
-	if (hitable_list(ray, 0.001, FLT_MAX, &var->hit, hit_list))
-	{
-		var->new = vec_plus_vec(var->hit->normal, var->hit->p);
-		if (var->new == NULL)
+		if (!init_col_var(&var))
 			return (NULL);
-		var->random = vec_plus_vec(var->new, rand_in_unit_sphere());
-		free(var->new);
-		if (var->random == NULL)
+		var->hit = malloc(sizeof(t_hit) * 1);
+		if (var->hit == NULL)
 			return (NULL);
-		var->some_vec = vec_minus_vec(var->random, var->hit->p);
-		free(var->random);
-		var->new_r = new_ray(var->hit->p, var->some_vec);
-		if (var->new_r == NULL)
+		if (hitable_list(ray, 0.001, FLT_MAX, &var->hit, hit_list))
 		{
+			var->new = vec_plus_vec(var->hit->normal, var->hit->p);
+			if (var->new == NULL)
+				return (NULL);
+			var->random = vec_plus_vec(var->new, rand_in_unit_sphere());
+			free(var->new);
+			if (var->random == NULL)
+				return (NULL);
+			var->some_vec = vec_minus_vec(var->random, var->hit->p);
+			free(var->random);
+			var->new_r = new_ray(var->hit->p, var->some_vec);
+			if (var->new_r == NULL)
+			{
+				free(var->hit);
+				free(var->new);
+				return (NULL);
+			}
+	//		ray->v1 = vec_times_num(new_r->v1, 0.5);
+	//		ray->v2 = vec_times_num(new_r->v2, 0.5);
+	//			ray = new_r;
+			// I could make an 2dmin arry to stopr these values!
+			//after
+			ray = var->new_r;
+			free(var->hit);
+			free(var);
+			iter++;
+	//		return (vec_times_num(color(var->new_r, hit_list), 0.5));
+		}
+		else
+		{
+			var->unit_dir = unit_vec(ray->v2);
+			var->t = 0.5 * (var->unit_dir->e[1] + 1.0);
+			var->new = new_vector(1.0, 1.0, 1.0);
+			if (var->new == NULL)
+				return (NULL);
+			var->new1 = new_vector(0.5, 0.7, 1.0);
+			if (var->new1 == NULL)
+				return (NULL);
+			var->tmp = vec_times_num(var->new, (1.0 - var->t));
+			if (var->tmp == NULL)
+				return (NULL);
+			free(var->new);
+			var->new = var->tmp;
+			var->tmp = vec_times_num(var->new1, var->t);
+			if (var->tmp == NULL)
+				return (NULL);
+			free(var->new1);
+			var->new1 = var->tmp;
+			var->ret = vec_plus_vec(var->new, var->new1);
+			if (var->ret == NULL)
+				return (NULL);
 			free(var->hit);
 			free(var->new);
-			return (NULL);
+			free(var->new1);
+			while (iter > 0)
+			{
+				holding = vec_times_num(var->ret, 0.5);
+				free(var->ret);
+				var->ret = holding;
+				iter--;
+			}
+			return (var->ret);
 		}
-//		ray->v1 = vec_times_num(new_r->v1, 0.5);
-//		ray->v2 = vec_times_num(new_r->v2, 0.5);
-//			ray = new_r;
-		// I could make an 2dmin arry to stopr these values!
-		//after
-		ray = var->new_r;
-		free(var->hit);
-		free(var);
-		iter++;
-//		return (vec_times_num(color(var->new_r, hit_list), 0.5));
-	}
-	else
-	{
-		var->unit_dir = unit_vec(ray->v2);
-		var->t = 0.5 * (var->unit_dir->e[1] + 1.0);
-		var->new = new_vector(1.0, 1.0, 1.0);
-		if (var->new == NULL)
-			return (NULL);
-		var->new1 = new_vector(0.5, 0.7, 1.0);
-		if (var->new1 == NULL)
-			return (NULL);
-		var->tmp = vec_times_num(var->new, (1.0 - var->t));
-		if (var->tmp == NULL)
-			return (NULL);
-		free(var->new);
-		var->new = var->tmp;
-		var->tmp = vec_times_num(var->new1, var->t);
-		if (var->tmp == NULL)
-			return (NULL);
-		free(var->new1);
-		var->new1 = var->tmp;
-		var->ret = vec_plus_vec(var->new, var->new1);
-		if (var->ret == NULL)
-			return (NULL);
-		free(var->hit);
-		free(var->new);
-		free(var->new1);
-		while (iter > 0)
-		{
-			holding = vec_times_num(var->ret, 0.5);
-			free(var->ret);
-			var->ret = holding;
-			iter--;
-		}
-		return (var->ret);
-	}
 	}
 }
 
@@ -102,7 +102,7 @@ static void	*draw_back_ground(t_data *img, t_camera *camera, t_hit_list *list)
 {
 	t_draw	*draw;
 
-	if(!init_draw(&draw, 1280, 720, 20))
+	if(!init_draw(&draw, 1280, 720, 0))
 		return (NULL);
 	for (int j = draw->y - 1; j >= 0; j--)
 	{
