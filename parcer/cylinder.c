@@ -1,8 +1,8 @@
 #include "parcer.h"
 
-void		ft_lstadd_back_c(t_camera **lst, t_camera *new)
+void		ft_lstadd_back_cy(t_cy **lst, t_cy *new)
 {
-	t_camera *tmp;
+	t_cy *tmp;
 
 	if (new == NULL)
 		return ;
@@ -10,12 +10,12 @@ void		ft_lstadd_back_c(t_camera **lst, t_camera *new)
 		*lst = new;
 	else
 	{
-		tmp = ft_lstlast_c(*lst);
+		tmp = ft_lstlast_cy(*lst);
 		tmp->next = new;
 	}
 }
 
-t_camera	*ft_lstlast_c(t_camera *lst)
+t_cy	*ft_lstlast_cy(t_cy *lst)
 {
 	if (lst == NULL)
 		return (NULL);
@@ -24,11 +24,11 @@ t_camera	*ft_lstlast_c(t_camera *lst)
 	return (lst);
 }
 
-t_camera	*ft_new_camera()
+t_cy	*ft_new_cy()
 {
-	t_camera	*tmp;
+	t_cy	*tmp;
 
-	tmp = malloc(sizeof(t_camera));
+	tmp = malloc(sizeof(t_cy));
 	if (tmp == NULL)
 		return (NULL);
 	else if (tmp)
@@ -39,26 +39,30 @@ t_camera	*ft_new_camera()
 		tmp->x_norm = 0.0;
 		tmp->y_norm = 0.0;
 		tmp->z_norm = 0.0;
-		tmp->FOV = 0.0;
+		tmp->r_col = 0.0;
+		tmp->g_col = 0.0;
+		tmp->b_col = 0.0;
+		tmp->diameter = 0.0;
+		tmp->height = 0.0;
 		tmp->next = NULL;
 	}
 	return (tmp);
 }
 
-char	ft_parc_camera(t_task **task, t_pars_vars **vars)
+char	ft_parc_cy(t_task **task, t_pars_vars **vars)
 {
 	char		hit;
 	char		hit_dig;
-	t_camera	*tmp;
+	t_cy	*tmp;
 
 	hit_dig = 0;
 	hit = 0;
 	(*vars)->i = 0;
-	tmp = ft_new_camera();
+	tmp = ft_new_cy();
 	if (tmp == NULL)
 		return (0);
-	hit_dig = ft_camera_con(&tmp, vars, hit, hit_dig);
-	ft_lstadd_back_c(&(*task)->camera, tmp);
+	hit_dig = ft_cy_con(&tmp, vars, hit, hit_dig);
+	ft_lstadd_back_cy(&(*task)->cy, tmp);
 	if (hit_dig == 0)
 		return (0);
 /*	if (hit_dig != 2)
@@ -69,26 +73,26 @@ char	ft_parc_camera(t_task **task, t_pars_vars **vars)
 	return (1);
 }
 
-char	ft_check_camera(char hit, char hit_dig, char b_char, size_t line)
+char	ft_check_cy(char hit, char hit_dig, char b_char, size_t line)
 {
-	if (hit == 0 && hit_dig == 1)
+	if (hit > 2 && hit_dig == 1)
 	{
 		printf("Error\nInvalid order of elements on line: %ld\n", line);
 		return (0);
 	}
-	if (!ft_strchr("0123456789c-,. \n", b_char))
+	if (!ft_strchr("0123456789cy-,. \n", b_char))
 	{
 		printf("Error\nInvalid char: \"%c\" on line: %ld\n", b_char, line);
 		return (0);
 	}
-	if (hit_dig == (char)8)
+	if (hit_dig == (char)12)
 	{
-		printf("Error\nBad numbers for c on line: %ld\n", line);
+		printf("Error\nBad numbers for cy on line: %ld\n", line);
 		return (0);
 	}
-	if (hit == (char)2)
+	if (hit == (char)3)
 	{
-		printf("Error\nOnly one of c alowed per.rt file: %ld\n", line);
+		printf("Error\nOnly one of cy alowed per line: %ld\n", line);
 		return (0);
 	}
 	return (1);
