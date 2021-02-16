@@ -1,17 +1,5 @@
 #include "minRT.h"
 
-/*
-**		POSIBLE IMPLEMENTATIONS
-**		CAMERA INIT ARR
-**	float		arr[3][2];
-*/
-/*
-**	WHATS WRONG WITH THIS
-**	NROM IT
-**	MAKE IT WITH NO LEAKS 
-**	PROBABLY WILL WORK
-*/
-
 static t_vec	*color(t_ray *ray, t_hit_list *hit_list)
 {
 	t_col_var	*var;
@@ -26,7 +14,7 @@ static t_vec	*color(t_ray *ray, t_hit_list *hit_list)
 		var->hit = malloc(sizeof(t_hit) * 1);
 		if (var->hit == NULL)
 			return (NULL);
-		if (hitable_list(ray, 0.001, FLT_MAX, &var->hit, hit_list))
+		if (hitable_list(ray, 0.001, INT_MAX, &var->hit, hit_list))
 		{
 			var->new = vec_plus_vec(var->hit->normal, var->hit->p);
 			if (var->new == NULL)
@@ -44,16 +32,10 @@ static t_vec	*color(t_ray *ray, t_hit_list *hit_list)
 				free(var->new);
 				return (NULL);
 			}
-	//		ray->v1 = vec_times_num(new_r->v1, 0.5);
-	//		ray->v2 = vec_times_num(new_r->v2, 0.5);
-	//			ray = new_r;
-			// I could make an 2dmin arry to stopr these values!
-			//after
 			ray = var->new_r;
 			free(var->hit);
 			free(var);
 			iter++;
-	//		return (vec_times_num(color(var->new_r, hit_list), 0.5));
 		}
 		else
 		{
@@ -98,14 +80,17 @@ static t_vec	*color(t_ray *ray, t_hit_list *hit_list)
 **	disable it for now becaus it slows down redering or set it to 1
 */
 
-static void	*draw_back_ground(t_data *img, t_camera *camera, t_hit_list *list)
+static void	*draw_back_ground(t_data *img, t_camera *camera, t_hit_list *list, clock_t t, clock_t original)
 {
 	t_draw	*draw;
 
-	if(!init_draw(&draw, 1280, 720, 0))
+	if(!init_draw(&draw, 1280, 720, 2))
 		return (NULL);
 	for (int j = draw->y - 1; j >= 0; j--)
 	{
+/*		t = clock() - original;
+		double time_taken = ((double)t)/CLOCKS_PER_SEC;
+		printf("foor loop start :%f\n", time_taken); */
 		for (int i = 0; i < draw->x; i++)
 		{
 			draw->col = new_vector(0.0, 0.0, 0.0);
@@ -144,6 +129,9 @@ static void	*draw_back_ground(t_data *img, t_camera *camera, t_hit_list *list)
 			draw->ray = NULL;
 			draw->col = NULL;
 		}
+		t = clock() - original;
+		time_taken = ((double)t)/CLOCKS_PER_SEC;
+		printf("for loop end :%f\n", time_taken);
 	}
 	return (free_draw(&draw));
 }
@@ -157,7 +145,7 @@ static t_hit_list	*malloc_list_2d(int size)
 	return (new);
 }
 
-int     main()
+int     main(int argc, char **argv)
 {
 	void	*mlx;
 	t_data	img;
@@ -166,7 +154,14 @@ int     main()
 	t_sphere	*sphere1;
 	t_hit_list	*list_of;
 	t_camera	*camera;
+	clock_t		original;
+	clock_t		t;
+	t_task		*task;
 
+	task = new_task(argc, argv);
+	if (task == NULL)
+		return (-1);
+	original = clock();
 	camera = new_camera();
 	if (camera == NULL)
 		return (0);
@@ -186,11 +181,17 @@ int     main()
 	list_of->list_size = 2;
 
 	mlx = mlx_init();
+/*	t = clock() - original;
+	double time_taken = ((double)t)/CLOCKS_PER_SEC;*/
+	printf("time to init all the varible :%f\n", time_taken);
 	mlx_win = mlx_new_window(mlx, 1280, 720, "HELLO WOLRD!");
 	img.img = mlx_new_image(mlx, 1280, 720);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-
-	draw_back_ground(&img, camera, list_of);
+	
+	t = clock() - original;
+	time_taken = ((double)t)/CLOCKS_PER_SEC;
+	printf("time to init all the MLX :%f\n", time_taken);
+	draw_back_ground(&img, camera, list_of, t, original);
 
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);

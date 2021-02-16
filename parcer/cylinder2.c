@@ -34,9 +34,8 @@ char	ft_cy_con(t_cy **cy, t_pars_vars **vars, char hit, char hit_dig)
 	comma = 0;
 	while ((*vars)->line[(*vars)->i])
 	{
-		if ((*vars)->line[(*vars)->i] == ',')
-			comma = ft_check_cy2(hit_dig, vars, comma);
-		if ((comma == -1 || comma == 7)  || (hit_dig == 1 && comma == 0))
+		comma = ft_check_cy2(hit_dig, vars, comma);
+		if ((comma == -1 || (hit_dig == 1 && comma == 0)))
 			return (-1);
 		if ((*vars)->line[(*vars)->i] == 'c')
 			hit++;
@@ -49,39 +48,43 @@ char	ft_cy_con(t_cy **cy, t_pars_vars **vars, char hit, char hit_dig)
 		}
 		else
 			(*vars)->i++;
-		if (!ft_check_cy(hit, hit_dig, (*vars)->line[(*vars)->i], (*vars)->line_cnt))
+		if (!ft_check_cy(hit, hit_dig, (*vars)->line[(*vars)->i]))
 			return (0);
 	}
 	return (hit_dig);
 }
-
 char	ft_check_cy2(char hit_dig, t_pars_vars **vars, char comma)
 {
 	if (hit_dig >= 1 && ((*vars)->line[(*vars)->i] == ','))
 		comma++;
-	if (hit_dig <= 4)
-	{
-		if (comma > 3)
-		{
-			printf("lols\n");
-			return (-1);
-		}
-	}
-	if (hit_dig <= 7 && hit_dig >= 5)
-	{
-		if (comma >= 5)
-		{
-			printf("lols2\n");
-			return (-1);
-		}
-	}
-	if (hit_dig <= 11 && hit_dig >= 8)
-	{
-		if (comma >= 8)
-		{
-			printf("lols3\n");
-			return (-1);
-		}
-	}
+	if (hit_dig == 1 && comma != 1)
+		return (-1);
+	if (hit_dig == 2 && comma != 2)
+		return (-1);
+	if (hit_dig == 3 && comma != 2)
+		return (-1);
+	if (hit_dig == 4 && comma != 3)
+		return (-1);
+	if (hit_dig == 5 && comma != 4)
+		return (-1);
+	if (hit_dig == 6 && comma != 4)
+		return (-1);
+	if (hit_dig == 7 && comma != 4)
+		return (-1);
+	if (hit_dig == 8 && comma != 4)
+		return (-1);
+	return (ft_check_cy3(hit_dig, comma));
+}
+
+char	ft_check_cy3(char hit_dig, char comma)
+{
+	if (hit_dig == 9 && comma != 5)
+		return (-1);
+	if (hit_dig == 10 && comma != 6)
+		return (-1);
+	if (hit_dig == 11 && comma != 6)
+		return (-1);
+	if (comma == 7)
+		return (-1);
 	return (comma);
 }

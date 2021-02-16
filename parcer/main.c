@@ -5,6 +5,7 @@
 #include <sys/uio.h>
 #include <float.h>
 #include <limits.h>
+#include <time.h>
 
 char	ft_parce_args2(t_task **task, t_pars_vars **vars)
 {
@@ -108,7 +109,7 @@ char	parce_argv_1(char *argv)
 		return (0);
 	return (1);
 }
-int	main(int argc, char **argv)
+t_task	*new_task(int argc, char **argv)
 {
 	t_pars_vars	*vars;
 	t_task		*task;
@@ -129,10 +130,11 @@ int	main(int argc, char **argv)
 	if (vars->fd == -1)
 	{
 		printf("Error: %s\n", strerror(errno));
-		return (error(&vars, -1, &task));
+		error(&vars, -1, &task);
+		return (NULL);
 	}	
 	if (!ft_parce_args(&task, &vars))
-		return (-1);
+		return (NULL);
 	else
 	{
 			printf("************************************************************\n");
@@ -318,5 +320,5 @@ int	main(int argc, char **argv)
 	//	ft_get_flag();
 //	check_task();
 	
-	return (0);
+	return (task);
 }

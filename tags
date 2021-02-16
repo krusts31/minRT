@@ -43,17 +43,17 @@ point_at_parm	ray.c	/^t_vec	*point_at_parm(float num, t_ray *ray)$/
 rand_in_unit_sphere	sphere.c	/^t_vec			*rand_in_unit_sphere()$/
 say_hi	hooks.c	/^int	say_hi()$/
 set_rand	sphere.c	/^static void		set_rand(t_sphere_difuse_var **var)$/
-t_camera	minRT.h	/^}			t_camera;$/
-t_col_var	minRT.h	/^}			t_col_var;$/
-t_data	minRT.h	/^}			t_data;$/
-t_draw	minRT.h	/^}			t_draw;$/
-t_hit	minRT.h	/^}			t_hit;$/
-t_hit_list	minRT.h	/^}			t_hit_list;$/
-t_ray	minRT.h	/^}			t_ray;$/
-t_sphere	minRT.h	/^}			t_sphere;$/
-t_sphere_difuse_var	minRT.h	/^}			t_sphere_difuse_var;$/
+t_camera	'	/^}			t_camera;$/
+t_col_var	'	/^}			t_col_var;$/
+t_data	'	/^}			t_data;$/
+t_draw	'	/^}			t_draw;$/
+t_hit	'	/^}			t_hit;$/
+t_hit_list	'	/^}			t_hit_list;$/
+t_ray	'	/^}			t_ray;$/
+t_sphere	'	/^}			t_sphere;$/
+t_sphere_difuse_var	'	/^}			t_sphere_difuse_var;$/
 t_vars	hooks.c	/^}               t_vars;$/
-t_vec	minRT.h	/^}			t_vec;$/
+t_vec	'	/^}			t_vec;$/
 unit_vec	vector_1.c	/^t_vec	*unit_vec(t_vec *v)$/
 vec_copy	vector_2.c	/^t_vec	*vec_copy(t_vec *src)$/
 vec_div_num	vector_1.c	/^t_vec	*vec_div_num(t_vec *v1, float num)$/

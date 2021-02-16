@@ -15,10 +15,10 @@ all: $(NAME)
 
 $(NAME): $(SRC_OBJ)
 	make -C ../libft
-	clang  $(CFLAGS) -L../libft -lft $(SRC) -o $(NAME) -g
+	clang  $(CFLAGS) -L../libft -lft $(SRC) -o $(NAME)
 
 %.o: %.c 
-	$(CC) $(CFLAGS)  -c $< -o $@ -g
+	$(CC) $(CFLAGS)  -c $< -o $@
 
 clean:
 	@/bin/rm -f $(SRC_OBJ)

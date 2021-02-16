@@ -48,7 +48,6 @@ t_pl	*ft_new_pl()
 }
 
 char	ft_parc_pl(t_task **task, t_pars_vars **vars)
-
 {
 	char		hit;
 	char		hit_dig;
@@ -62,8 +61,11 @@ char	ft_parc_pl(t_task **task, t_pars_vars **vars)
 		return (0);
 	hit_dig = ft_pl_con(&tmp, vars, hit, hit_dig);
 	ft_lstadd_back_pl(&(*task)->pl, tmp);
-	if (hit_dig == 0)
+	if (hit_dig != 9)
+	{
+		printf("Error\nBad elements on line %ld\n", (*vars)->line_cnt);
 		return (0);
+	}
 /*	if (hit_dig != 2)
 	{
 		printf("Error\n2 numbers needed for A on line %ld\n", (*vars)->line_cnt);
@@ -72,27 +74,13 @@ char	ft_parc_pl(t_task **task, t_pars_vars **vars)
 	return (1);
 }
 
-char	ft_check_pl(char hit, char hit_dig, char b_char, size_t line)
+char	ft_check_pl(char hit, char hit_dig, char b_char)
 {
 	if (hit > 2 && hit_dig == 1)
-	{
-		printf("Error\nInvalid order of elements on line: %ld\n", line);
 		return (0);
-	}
 	if (!ft_strchr("0123456789pl-,. \n", b_char))
-	{
-		printf("Error\nInvalid char: \"%c\" on line: %ld\n", b_char, line);
 		return (0);
-	}
-	if (hit_dig == (char)8)
-	{
-		printf("Error\nBad numbers for pl on line: %ld\n", line);
-		return (0);
-	}
 	if (hit == (char)3)
-	{
-		printf("Error\nOnly one of pl alowed per line: %ld\n", line);
 		return (0);
-	}
 	return (1);
 }

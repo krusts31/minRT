@@ -62,8 +62,11 @@ char	ft_parc_sq(t_task **task, t_pars_vars **vars)
 		return (0);
 	hit_dig = ft_sq_con(&tmp, vars, hit, hit_dig);
 	ft_lstadd_back_sq(&(*task)->sq, tmp);
-	if (hit_dig == 0)
+	if (hit_dig != 10)
+	{
+		printf("Error\nBad elements on line %ld\n", (*vars)->line_cnt);
 		return (0);
+	}
 /*	if (hit_dig != 2)
 	{
 		printf("Error\n2 numbers needed for A on line %ld\n", (*vars)->line_cnt);
@@ -72,27 +75,13 @@ char	ft_parc_sq(t_task **task, t_pars_vars **vars)
 	return (1);
 }
 
-char	ft_check_sq(char hit, char hit_dig, char b_char, size_t line)
+char	ft_check_sq(char hit, char hit_dig, char b_char)
 {
 	if (hit > 2 && hit_dig == 1)
-	{
-		printf("Error\nInvalid order of elements on line: %ld\n", line);
 		return (0);
-	}
 	if (!ft_strchr("0123456789sq-,. \n", b_char))
-	{
-		printf("Error\nInvalid char: \"%c\" on line: %ld\n", b_char, line);
 		return (0);
-	}
-	if (hit_dig == (char)11)
-	{
-		printf("Error\nBad numbers for sq on line: %ld\n", line);
-		return (0);
-	}
 	if (hit == (char)3)
-	{
-		printf("Error\nOnly one of sq alowed per line: %ld\n", line);
 		return (0);
-	}
 	return (1);
 }
