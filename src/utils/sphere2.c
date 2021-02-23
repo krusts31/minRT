@@ -3,9 +3,9 @@
 
 #include <stdio.h>
 
-void		ft_lstadd_back_sp(t_sp **lst, t_sp *new)
+void	ft_lstadd_back_sp(t_sp **lst, t_sp *new)
 {
-	t_sp *tmp;
+	t_sp	*tmp;
 
 	if (new == NULL)
 		return ;
@@ -27,7 +27,7 @@ t_sp	*ft_lstlast_sp(t_sp *lst)
 	return (lst);
 }
 
-t_sp	*ft_new_sp()
+t_sp	*ft_new_sp(void)
 {
 	t_sp	*tmp;
 
@@ -70,11 +70,11 @@ char	ft_parc_sp(t_task **task, t_pars_vars **vars)
 
 char	ft_check_sp(char hit, char hit_dig, char b_char)
 {
-	if (hit > 2 && hit_dig == (char)1)
+	if (hit > 2 && hit_dig == (char) 1)
 		return (0);
 	if (!ft_strchr("0123456789sp-,. \n", b_char))
 		return (0);
-	if (hit > (char)3)
+	if (hit > (char) 3)
 		return (0);
 	return (1);
 }

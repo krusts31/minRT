@@ -3,9 +3,9 @@
 
 #include <stdio.h>
 
-void		ft_lstadd_back_pl(t_pl **lst, t_pl *new)
+void	ft_lstadd_back_pl(t_pl **lst, t_pl *new)
 {
-	t_pl *tmp;
+	t_pl	*tmp;
 
 	if (new == NULL)
 		return ;
@@ -27,7 +27,7 @@ t_pl	*ft_lstlast_pl(t_pl *lst)
 	return (lst);
 }
 
-t_pl	*ft_new_pl()
+t_pl	*ft_new_pl(void)
 {
 	t_pl	*tmp;
 
@@ -37,20 +37,19 @@ t_pl	*ft_new_pl()
 	else if (tmp)
 	{
 		tmp->cor = new_vector(0, 0, 0);
-		tmp->norm = new_vector(0, 0, 0);;
+		tmp->norm = new_vector(0, 0, 0);
 		tmp->col = new_vector_uc(0, 0, 0);
 		tmp->next = NULL;
 	}
-	if (tmp->cor == NULL || tmp->norm == NULL ||
-		tmp->col == NULL)
+	if (tmp->cor == NULL || tmp->norm == NULL || tmp->col == NULL)
 		return (NULL);
 	return (tmp);
 }
 
-char	ft_parc_pl(t_task **task, t_pars_vars **vars)
+void	ft_parc_pl(t_task **task, t_pars_vars **vars)
 {
-	char		hit;
-	char		hit_dig;
+	char	hit;
+	char	hit_dig;
 	t_pl	*tmp;
 
 	hit_dig = 0;
@@ -58,15 +57,11 @@ char	ft_parc_pl(t_task **task, t_pars_vars **vars)
 	(*vars)->i = 0;
 	tmp = ft_new_pl();
 	if (tmp == NULL)
-		return (0);
-	hit_dig = ft_pl_con(&tmp, vars, hit, hit_dig);
+		exit(!printf("Error\nOut of memmory ft_new_pl()\n"));
+	hit_dig = pl_con(&tmp, vars, hit, hit_dig);
 	if (hit_dig != 9)
-	{
-		printf("Error\nBad elements on line %ld\n", (*vars)->line_cnt);
-		return (0);
-	}
+		exit(!printf("Error\non line %ld\n", (*vars)->line_cnt));
 	ft_lstadd_back_pl(&(*task)->pl, tmp);
-	return (1);
 }
 
 char	ft_check_pl(char hit, char hit_dig, char b_char)
@@ -75,7 +70,7 @@ char	ft_check_pl(char hit, char hit_dig, char b_char)
 		return (0);
 	if (!ft_strchr("0123456789pl-,. \n", b_char))
 		return (0);
-	if (hit == (char)3)
+	if (hit == (char) 3)
 		return (0);
 	return (1);
 }

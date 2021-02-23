@@ -2,7 +2,7 @@
 
 char	char_parce(unsigned char *col, t_pars_vars **vars)
 {
-	char		index;
+	char			index;
 	unsigned short	nr;
 	unsigned char	fin;
 

@@ -13,7 +13,7 @@ t_vec	*point_at_parm(float num, t_ray *ray)
 
 t_ray	*new_ray(t_vec *vec1, t_vec *vec2)
 {
-	t_ray *new;
+	t_ray	*new;
 
 	new = malloc(sizeof(t_ray) * 1);
 	if (new == NULL)

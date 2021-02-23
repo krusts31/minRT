@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-int			len_to_c(char *line, char hit, int ret, t_list123 **info)
+int	len_to_c(char *line, char hit, int ret, t_list123 **info)
 {
 	int	x;
 
@@ -35,7 +35,7 @@ int			len_to_c(char *line, char hit, int ret, t_list123 **info)
 	return (ret);
 }
 
-int			ft_con(t_list123 *info, char **line)
+int	ft_con(t_list123 *info, char **line)
 {
 	while (info->buf[info->y] != '\n' && info->buf[info->y] != '\0')
 	{
@@ -83,7 +83,7 @@ t_list123	*init_list(int fd)
 
 t_list123	*ft_lst_b(t_list123 **lst, t_list123 *new, char **line)
 {
-	t_list123 *tmp;
+	t_list123	*tmp;
 
 	tmp = *lst;
 	if (line)
@@ -109,10 +109,10 @@ t_list123	*ft_lst_b(t_list123 **lst, t_list123 *new, char **line)
 	return (tmp->next);
 }
 
-int			delete_node(t_list123 **info, char **line)
+int	delete_node(t_list123 **info, char **line)
 {
-	t_list123 *tmp;
-	t_list123 *prev;
+	t_list123	*tmp;
+	t_list123	*prev;
 
 	*line[0] = '\0';
 	tmp = *info;

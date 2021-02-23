@@ -24,15 +24,15 @@ char	ft_pl_con2(t_pl **pl, t_pars_vars **vars, char hit_dig)
 	return (1);
 }
 
-char	ft_pl_con(t_pl **pl, t_pars_vars **vars, char hit, char hit_dig)
+char	pl_con(t_pl **pl, t_pars_vars **vars, char hit, char hit_d)
 {
 	char	comma;
 
 	comma = 0;
 	while ((*vars)->line[(*vars)->i])
 	{
-		comma = ft_check_pl2(hit_dig, vars, comma);
-		if (comma == -1 || (hit_dig == 1 && comma == 0))
+		comma = ft_check_pl2(hit_d, vars, comma);
+		if (comma == -1 || (hit_d == 1 && comma == 0))
 			return (0);
 		if ((*vars)->line[(*vars)->i] == 'p')
 			hit++;
@@ -40,15 +40,15 @@ char	ft_pl_con(t_pl **pl, t_pars_vars **vars, char hit, char hit_dig)
 			hit++;
 		if (ft_isfloat((*vars)->line[(*vars)->i]))
 		{
-			hit_dig++;
-			ft_pl_con2(pl, vars, hit_dig);
+			hit_d++;
+			ft_pl_con2(pl, vars, hit_d);
 		}
 		else
 			(*vars)->i++;
-		if (!ft_check_pl(hit, hit_dig, (*vars)->line[(*vars)->i]))
+		if (!ft_check_pl(hit, hit_d, (*vars)->line[(*vars)->i]))
 			return (0);
 	}
-	return (hit_dig);
+	return (hit_d);
 }
 
 char	ft_check_pl2(char hit_dig, t_pars_vars **vars, char comma)

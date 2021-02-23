@@ -20,7 +20,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-typedef struct	s_lista
+typedef struct s_lista
 {
 	struct s_lista	*next;
 	char			*rem;

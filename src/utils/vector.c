@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include <math.h>
 
-float	length_of_vector(t_vec *self)
+float	length_of_vector(t_vec *s)
 {
-	return sqrt((pow(self->e[0], 2) + pow(self->e[1], 2) + pow(self->e[2], 2)));
+	return (sqrt((pow(s->e[0], 2) + pow(s->e[1], 2) + pow(s->e[2], 2))));
 }
 
 t_vec	*cross_vector(t_vec *v1, t_vec *v2)
@@ -16,7 +16,7 @@ t_vec	*cross_vector(t_vec *v1, t_vec *v2)
 	if (new == NULL)
 		return (0);
 	new->e[0] = (v1->e[1] * v2->e[2] - v1->e[2] * v2->e[1]);
-	new->e[1] = -(v1->e[0] * v2->e[2] - v1->e[2] * v2->e[0]);
+	new->e[1] = - (v1->e[0] * v2->e[2] - v1->e[2] * v2->e[0]);
 	new->e[2] = (v1->e[0] * v2->e[1] - v1->e[1] * v2->e[0]);
 	return (new);
 }

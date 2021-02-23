@@ -38,7 +38,7 @@ char	ft_tr_con(t_tr **tr, t_pars_vars **vars, char hit, char hit_dig)
 	while ((*vars)->line[(*vars)->i])
 	{
 		comma = ft_check_tr2(hit_dig, vars, comma);
-		if ((comma == -1 || comma == 9)  || (hit_dig == 1 && comma == 0))
+		if ((comma == -1 || comma == 9) || (hit_dig == 1 && comma == 0))
 			return (0);
 		if ((*vars)->line[(*vars)->i] == 't')
 			hit++;

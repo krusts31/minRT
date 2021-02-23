@@ -49,7 +49,6 @@ SRC = src/utils/Amb.c \
 	src/utils/ray.c \
 	src/utils/vector.c \
 	src/utils/vector_2.c \
-	src/utils/circle.c \
 	src/utils/free_render.c \
 	src/utils/pixel.c \
 	src/utils/sphere.c \
@@ -62,7 +61,8 @@ SRC = src/utils/Amb.c \
 	src/utils/print_res.c \
 	src/utils/colors2.c \
 	src/utils/camera3.c \
-	src/uritls/main.c 
+	src/utils/utils5.c \
+	src/utils/main.c 
 
 SRC_OBJ = $(SRC:.c=.o)
 

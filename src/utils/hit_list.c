@@ -4,7 +4,7 @@
 
 int	hitable_list(t_ray *ray, float closest_so_far, t_hit **hit, t_sp *sp)
 {
-	t_hit		*temp_hit;
+	t_hit	*temp_hit;
 	int		hit_anything;
 
 	hit_anything = 0;
@@ -13,7 +13,7 @@ int	hitable_list(t_ray *ray, float closest_so_far, t_hit **hit, t_sp *sp)
 		return (0);
 	while (sp)
 	{
-		if (hit_sphere(ray, closest_so_far, temp_hit, sp))
+		if (hit_sp(ray, closest_so_far, temp_hit, sp))
 		{
 			hit_anything = 1;
 			closest_so_far = temp_hit->t;

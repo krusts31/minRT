@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-static t_vec		*free_rand(t_sphere_difuse_var **var)
+static t_vec	*free_rand(t_sphere_difuse_var **var)
 {
 	free((*var)->one);
 	free((*var)->rand);
@@ -12,7 +12,7 @@ static t_vec		*free_rand(t_sphere_difuse_var **var)
 	return (NULL);
 }
 
-static void		set_rand(t_sphere_difuse_var **var)
+static void	set_rand(t_sphere_difuse_var **var)
 {
 	(*var)->one = NULL;
 	(*var)->rand = NULL;
@@ -20,7 +20,7 @@ static void		set_rand(t_sphere_difuse_var **var)
 	(*var)->tmp = NULL;
 }
 
-static t_vec		*compute_rand(t_sphere_difuse_var **var)
+static t_vec	*compute_rand(t_sphere_difuse_var **var)
 {
 	t_vec	*temp;
 
@@ -41,10 +41,10 @@ static t_vec		*compute_rand(t_sphere_difuse_var **var)
 	return (temp);
 }
 
-t_vec			*rand_in_unit_sphere()
+t_vec	*rand_in_unit_sphere(void)
 {
 	t_sphere_difuse_var	*var;
-	t_vec			*ret;
+	t_vec				*ret;
 
 	var = malloc(sizeof(t_sphere_difuse_var) * 1);
 	if (var == NULL)
@@ -67,7 +67,7 @@ t_vec			*rand_in_unit_sphere()
 	return (ret);
 }
 
-int			hit_sphere(t_ray *ray, float closest_so_far, t_hit *hit, t_sp *sp)
+int	hit_sp(t_ray *ray, float closest_so_far, t_hit *hit, t_sp *sp)
 {
 	t_hit_sp	*hit_sp;
 
@@ -82,6 +82,6 @@ int			hit_sphere(t_ray *ray, float closest_so_far, t_hit *hit, t_sp *sp)
 	hit_sp->c = dot_vector(hit_sp->oc, hit_sp->oc) - pow(sp->diameter / 2, 2);
 	hit_sp->disc = pow(hit_sp->b, 2) - hit_sp->a * hit_sp->c;
 	if (hit_sp->disc > 0.0)
-		return (ft_calc_sphere(&hit, &hit_sp, sp, ray));
+		return (c_sp(&hit, &hit_sp, sp, ray));
 	return (0);
 }

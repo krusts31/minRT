@@ -1,5 +1,0 @@
-Mmain	main.c	/^int     main(int argc, char **argv)$/
-color	main.c	/^static t_vec	*color(t_ray *ray, t_hit_list *hit_li/
-draw_back_ground	main.c	/^static void	*draw_back_ground(t_data *img, t_camer/
-free_task	main.c	/^char	free_task(t_task **task)$/
-malloc_list_2d	main.c	/^static t_hit_list	*malloc_list_2d(int size)$/

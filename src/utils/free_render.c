@@ -38,7 +38,7 @@ int	init_col_var(t_col_var **var)
 	(*var) = malloc(sizeof(t_col_var) * 1);
 	if (*var == NULL)
 		return (-1);
-	(*var)->hit = NULL; 
+	(*var)->hit = NULL;
 	(*var)->unit_dir = NULL;
 	(*var)->t = 0.0;
 	(*var)->new = NULL;

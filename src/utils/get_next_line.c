@@ -121,7 +121,7 @@ static int	gnl_con(t_list123 **info, t_list123 **tmp, int fd, char **line)
 	return (1);
 }
 
-int			get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static t_list123	*info = NULL;
 	t_list123			*tmp;

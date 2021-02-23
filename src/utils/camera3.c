@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 
-t_image_var	*ft_init_image()
+t_image_var	*ft_init_image(void)
 {
 	t_image_var	*tmp;
 
@@ -17,7 +17,7 @@ t_image_var	*ft_init_image()
 	return (tmp);
 }
 
-t_image_plane	*ft_init_image_plane()
+t_image_plane	*ft_init_image_plane(void)
 {
 	t_image_plane	*tmp;
 
@@ -30,7 +30,7 @@ t_image_plane	*ft_init_image_plane()
 	return (tmp);
 }
 
-void		*ft_free_image_vars(t_image_var **vars)
+void	*ft_free_image_vars(t_image_var **vars)
 {
 	free((*vars)->u);
 	free((*vars)->v);
@@ -41,7 +41,7 @@ void		*ft_free_image_vars(t_image_var **vars)
 	return (NULL);
 }
 
-void		*ft_free_image(t_image_plane **plane)
+void	*ft_free_image(t_image_plane **plane)
 {
 	free((*plane)->upper_left);
 	free((*plane)->horizontal);
@@ -50,7 +50,7 @@ void		*ft_free_image(t_image_plane **plane)
 	return (NULL);
 }
 
-void		*ft_image_error(t_image_var **var, t_image_plane **plane)
+void	*ft_image_error(t_image_var **var, t_image_plane **plane)
 {
 	ft_free_image_vars(var);
 	ft_free_image(plane);

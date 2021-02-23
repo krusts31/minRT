@@ -2,21 +2,21 @@
 # define VARIBLES_H
 # include <stddef.h>
 
-typedef struct		s_data
+typedef struct s_data
 {
 	void	*img;
 	char	*addr;
-	int	bits_per_pixel;
-	int	line_length;
-	int	endian;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 }			t_data;
 
-typedef struct		s_vec
+typedef struct s_vec
 {
 	float		e[3];
 }			t_vec;
 
-typedef struct		s_vec_uc
+typedef struct s_vec_uc
 {
 	unsigned char	e[3];
 }			t_vec_uc;
@@ -26,20 +26,20 @@ typedef struct		s_vec_uc
 **		v2 if direction
 */
 
-typedef struct		s_ray
+typedef struct s_ray
 {
 	t_vec	*v1;
 	t_vec	*v2;
 }			t_ray;
 
-typedef struct		s_hit
+typedef struct s_hit
 {
 	float	t;
 	t_vec	*p;
 	t_vec	*normal;
 }			t_hit;
 
-typedef	struct		s_sphere_difuse_var
+typedef struct s_sphere_difuse_var
 {
 	t_vec	*point;
 	t_vec	*rand;
@@ -47,7 +47,7 @@ typedef	struct		s_sphere_difuse_var
 	t_vec	*tmp;
 }			t_sphere_difuse_var;
 
-typedef struct		s_camera
+typedef struct s_camera
 {
 	t_vec	*origin;
 	t_vec	*lower_left_corner;
@@ -55,26 +55,26 @@ typedef struct		s_camera
 	t_vec	*vertical;
 }			t_camera;
 
-typedef struct		s_draw
+typedef struct s_draw
 {
 	t_ray	*ray;
 	t_vec	*p;
 	t_vec	*temp;
 	t_vec	*col;
 	t_vec	*new_col;
-	int	x;
-	int	y;
-	int	ret;
-	int	t;
-	int	n;
+	int		x;
+	int		y;
+	int		ret;
+	int		t;
+	int		n;
 	float	u;
 	float	v;
-	int	ir;
-	int	ig;
-	int	ib;
+	int		ir;
+	int		ig;
+	int		ib;
 }			t_draw;
 
-typedef struct		s_col_var
+typedef struct s_col_var
 {
 	t_hit	*hit;
 	t_vec	*unit_dir;
@@ -88,7 +88,7 @@ typedef struct		s_col_var
 	t_vec	*some_vec;
 }			t_col_var;
 
-typedef struct		s_sq
+typedef struct s_sq
 {
 	t_vec		*cor;
 	t_vec		*norm;
@@ -102,7 +102,7 @@ typedef struct		s_sq
 **	Plane
 */
 
-typedef struct		s_pl
+typedef struct s_pl
 {
 	t_vec		*cor;
 	t_vec		*norm;
@@ -114,7 +114,7 @@ typedef struct		s_pl
 **	Cylinder
 */
 
-typedef struct		s_cy
+typedef struct s_cy
 {
 	t_vec		*cor;
 	t_vec		*norm;
@@ -128,7 +128,7 @@ typedef struct		s_cy
 **	Triangle
 */
 
-typedef	struct		s_tr
+typedef struct s_tr
 {
 	t_vec		*cor1;
 	t_vec		*cor2;
@@ -141,7 +141,7 @@ typedef	struct		s_tr
 **	Sphere
 */
 
-typedef struct		s_sp
+typedef struct s_sp
 {
 	t_vec		*cor;
 	t_vec_uc	*col;
@@ -153,7 +153,7 @@ typedef struct		s_sp
 **	Ambient light
 */
 
-typedef struct		s_amb_light
+typedef struct s_amb_light
 {
 	float		ratio;
 	t_vec_uc	*col;
@@ -163,31 +163,33 @@ typedef struct		s_amb_light
 **	Camera
 */
 
-typedef struct		s_image_var
+typedef struct s_image_var
 {
 	t_vec		*u;
 	t_vec		*v;
 	t_vec		*w;
 	t_vec		*tmp;
 	t_vec		*tmp2;
+	t_vec		*tmp3;
+	t_vec		*tmp4;
 	float		theta;
 	float		half_width;
 	float		half_height;
 }			t_image_var;
 
-typedef struct		s_image_plane
+typedef struct s_image_plane
 {
 	t_vec		*upper_left;
 	t_vec		*horizontal;
 	t_vec		*vertical;
 }			t_image_plane;
 
-typedef struct		s_cameraPP
+typedef struct s_cameraPP
 {
-	t_vec			*cor;
-	t_vec			*norm;
 	t_image_plane		*image;
-	float			FOV;
+	t_vec				*cor;
+	t_vec				*norm;
+	float				FOV;
 	struct s_cameraPP	*next;
 }			t_cameraP;
 
@@ -195,15 +197,15 @@ typedef struct		s_cameraPP
 **	ratio:	the brights ratio values [0.0, 1.0]
 */
 
-typedef struct		s_light
+typedef struct s_light
 {
-	t_vec		*cor;
-	t_vec_uc	*col;
-	float		ratio;
+	t_vec			*cor;
+	t_vec_uc		*col;
+	float			ratio;
 	struct s_light	*next;
-}			t_light;
+}		t_light;
 
-typedef struct		s_task
+typedef struct s_task
 {
 	size_t		X_res;
 	size_t		Y_res;
@@ -218,16 +220,16 @@ typedef struct		s_task
 	char		save;
 }			t_task;
 
-typedef struct		s_pars_vars
+typedef struct s_pars_vars
 {
 	char		*line;
-	int		fd;
-	int		ret;
-	int		i;
+	int			fd;
+	int			ret;
+	int			i;
 	size_t		line_cnt;
 }			t_pars_vars;
 
-typedef struct		s_hit_sp
+typedef struct s_hit_sp
 {
 	float		a;
 	float		b;

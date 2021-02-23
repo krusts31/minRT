@@ -3,9 +3,9 @@
 
 #include <stdio.h>
 
-void		ft_lstadd_back_tr(t_tr **lst, t_tr *new)
+void	ft_lstadd_back_tr(t_tr **lst, t_tr *new)
 {
-	t_tr *tmp;
+	t_tr	*tmp;
 
 	if (new == NULL)
 		return ;
@@ -27,7 +27,7 @@ t_tr	*ft_lstlast_tr(t_tr *lst)
 	return (lst);
 }
 
-t_tr	*ft_new_tr()
+t_tr	*ft_new_tr(void)
 {
 	t_tr	*tmp;
 
@@ -42,16 +42,15 @@ t_tr	*ft_new_tr()
 		tmp->col = new_vector_uc(0, 0, 0);
 		tmp->next = NULL;
 	}
-	if (tmp->cor1 == NULL || tmp->cor2 == NULL || tmp->cor3 == NULL ||
-		tmp->col == NULL)
+	if (!tmp->cor1 || !tmp->cor2 || !tmp->cor3 || !tmp->col)
 		return (NULL);
 	return (tmp);
 }
 
-char	ft_parc_tr(t_task **task, t_pars_vars **vars)
+void	ft_parc_tr(t_task **task, t_pars_vars **vars)
 {
-	char		hit;
-	char		hit_dig;
+	char	hit;
+	char	hit_dig;
 	t_tr	*tmp;
 
 	hit_dig = 0;
@@ -59,15 +58,11 @@ char	ft_parc_tr(t_task **task, t_pars_vars **vars)
 	(*vars)->i = 0;
 	tmp = ft_new_tr();
 	if (tmp == NULL)
-		return (0);
+		exit(!printf("Error\nOut of memmory ft_new_tr()!\n"));
 	hit_dig = ft_tr_con(&tmp, vars, hit, hit_dig);
 	if (hit_dig != 12)
-	{
-		printf("Error\nBad elements on line %ld\n", (*vars)->line_cnt);	
-		return (0);
-	}
+		exit(!printf("Error\non line %ld\n", (*vars)->line_cnt));
 	ft_lstadd_back_tr(&(*task)->tr, tmp);
-	return (1);
 }
 
 char	ft_check_tr(char hit, char hit_dig, char b_char)
@@ -76,7 +71,7 @@ char	ft_check_tr(char hit, char hit_dig, char b_char)
 		return (0);
 	if (!ft_strchr("0123456789tr-,. \n", b_char))
 		return (0);
-	if (hit == (char)3)
+	if (hit == (char) 3)
 		return (0);
 	return (1);
 }

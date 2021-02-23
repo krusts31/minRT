@@ -1,5 +1,6 @@
 #include "parcer.h"
 
+#include <stdlib.h>
 #include <stdio.h>
 
 char	ft_check_res(char hit, char hit_dig, char b_char)
@@ -8,12 +9,12 @@ char	ft_check_res(char hit, char hit_dig, char b_char)
 		return (0);
 	if (!ft_strchr("0123456789R \n", b_char))
 		return (0);
-	if (hit == (char)2)
+	if (hit == (char) 2)
 		return (0);
 	return (1);
 }
 
-char	ft_res_con(t_task **task, t_pars_vars **vars, char *hit, char hit_dig)
+char	res_con(t_task **task, t_pars_vars **vars, char *hit, char hit_d)
 {
 	while ((*vars)->line[(*vars)->i])
 	{
@@ -21,13 +22,13 @@ char	ft_res_con(t_task **task, t_pars_vars **vars, char *hit, char hit_dig)
 			*hit = *hit + 1;
 		if (ft_isdigit((*vars)->line[(*vars)->i]))
 		{
-			hit_dig++;
-			if (hit_dig == 1)
+			hit_d++;
+			if (hit_d == 1)
 			{
 				(*task)->X_res = ft_atoi((*vars)->line + (*vars)->i);
 				(*vars)->i += ft_size_t_len((*task)->X_res);
 			}
-			if (hit_dig == 2)
+			if (hit_d == 2)
 			{
 				(*task)->Y_res = ft_atoi((*vars)->line + (*vars)->i);
 				(*vars)->i += ft_size_t_len((*task)->Y_res);
@@ -35,24 +36,21 @@ char	ft_res_con(t_task **task, t_pars_vars **vars, char *hit, char hit_dig)
 		}
 		else
 			(*vars)->i++;
-		if (!ft_check_res(*hit, hit_dig, (*vars)->line[(*vars)->i]))
+		if (!ft_check_res(*hit, hit_d, (*vars)->line[(*vars)->i]))
 			return (0);
 	}
-	return (hit_dig);
+	return (hit_d);
 }
 
 char	ft_parc_res(t_task **task, t_pars_vars **vars)
 {
-	static char hitR = 0;
-	char	hit_dig;
+	static char	hitR = 0;
+	char		hit_dig;
 
 	hit_dig = 0;
 	(*vars)->i = 0;
-	hit_dig = ft_res_con(task, vars, &hitR, hit_dig);
+	hit_dig = res_con(task, vars, &hitR, hit_dig);
 	if (hit_dig != 2)
-	{
-		printf("Error\n2 numbers needed for R on line %ld\n", (*vars)->line_cnt);
-		return (0);
-	}
+		exit(!printf("Error\non line: %ld\n", (*vars)->line_cnt));
 	return (1);
 }

@@ -1,11 +1,12 @@
 #include "parcer.h"
 #include "minRT.h"
 
+#include <stdlib.h>
 #include <stdio.h>
 
-void		ft_lstadd_back_l(t_light **lst, t_light *new)
+void	ft_lstadd_back_l(t_light **lst, t_light *new)
 {
-	t_light *tmp;
+	t_light	*tmp;
 
 	if (new == NULL)
 		return ;
@@ -27,7 +28,7 @@ t_light	*ft_lstlast_l(t_light *lst)
 	return (lst);
 }
 
-t_light	*ft_new_light()
+t_light	*ft_new_light(void)
 {
 	t_light	*tmp;
 
@@ -45,7 +46,7 @@ t_light	*ft_new_light()
 	return (tmp);
 }
 
-char	ft_parc_light(t_task **task, t_pars_vars **vars)
+void	ft_parc_light(t_task **task, t_pars_vars **vars)
 {
 	char		hit;
 	char		hit_dig;
@@ -56,15 +57,11 @@ char	ft_parc_light(t_task **task, t_pars_vars **vars)
 	(*vars)->i = 0;
 	tmp = ft_new_light();
 	if (tmp == NULL)
-		return (0);
-	hit_dig = ft_light_con(&tmp, vars, hit, hit_dig);
+		exit(!printf("Error\nOut of memmort fT_new_light()!\n"));
+	hit_dig = l_con(&tmp, vars, hit, hit_dig);
 	if (hit_dig != 7)
-	{
-		printf("Error\nBad elements on line %ld\n", (*vars)->line_cnt);
-		return (0);
-	}
+		exit(!printf("Error\non line %ld\n", (*vars)->line_cnt));
 	ft_lstadd_back_l(&(*task)->light, tmp);
-	return (1);
 }
 
 char	ft_check_light(char hit, char hit_dig, char b_char)
@@ -73,7 +70,7 @@ char	ft_check_light(char hit, char hit_dig, char b_char)
 		return (0);
 	if (!ft_strchr("0123456789l-,. \n", b_char))
 		return (0);
-	if (hit == (char)2)
+	if (hit == (char) 2)
 		return (0);
 	return (1);
 }

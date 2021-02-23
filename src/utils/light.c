@@ -20,30 +20,30 @@ char	ft_light_con2(t_light **light, t_pars_vars **vars, char hit_dig)
 	return (1);
 }
 
-char	ft_light_con(t_light **light, t_pars_vars **vars, char hit, char hit_dig)
+char	l_con(t_light **light, t_pars_vars **vars, char hit, char hit_d)
 {
 	char	comma;
 
 	comma = 0;
 	while ((*vars)->line[(*vars)->i])
 	{
-		comma = ft_check_light2(hit_dig, vars, comma);
-		if (comma == -1 || (hit_dig == 1 && comma == 0))
+		comma = ft_check_light2(hit_d, vars, comma);
+		if (comma == -1 || (hit_d == 1 && comma == 0))
 			return (0);
 		if ((*vars)->line[(*vars)->i] == 'l')
 			hit++;
 		if (ft_isfloat((*vars)->line[(*vars)->i]))
 		{
-			hit_dig++;
-			if (!ft_light_con2(light, vars, hit_dig))
+			hit_d++;
+			if (!ft_light_con2(light, vars, hit_d))
 				return (0);
 		}
 		else
 			(*vars)->i++;
-		if (!ft_check_light(hit, hit_dig, (*vars)->line[(*vars)->i]))
+		if (!ft_check_light(hit, hit_d, (*vars)->line[(*vars)->i]))
 			return (0);
 	}
-	return (hit_dig);
+	return (hit_d);
 }
 
 char	ft_check_light2(char hit_dig, t_pars_vars **vars, char comma)

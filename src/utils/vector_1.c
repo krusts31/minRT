@@ -53,7 +53,6 @@ t_vec	*vec_div_num(t_vec *v1, float num)
 	return (new);
 }
 
-
 t_vec	*unit_vec(t_vec *v)
 {
 	t_vec	*ret;

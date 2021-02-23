@@ -54,6 +54,7 @@ char	ft_cy_con(t_cy **cy, t_pars_vars **vars, char hit, char hit_dig)
 	}
 	return (hit_dig);
 }
+
 char	ft_check_cy2(char hit_dig, t_pars_vars **vars, char comma)
 {
 	if (hit_dig >= 1 && ((*vars)->line[(*vars)->i] == ','))
