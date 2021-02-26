@@ -62,7 +62,9 @@ SRC = src/utils/Amb.c \
 	src/utils/colors2.c \
 	src/utils/camera3.c \
 	src/utils/utils5.c \
-	src/utils/main.c 
+	src/utils/main.c \
+	src/utils/vector_3.c \
+	src/utils/material.c
 
 SRC_OBJ = $(SRC:.c=.o)
 

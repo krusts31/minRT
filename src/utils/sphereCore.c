@@ -67,7 +67,7 @@ t_vec	*rand_in_unit_sphere(void)
 	return (ret);
 }
 
-int	hit_sp(t_ray *ray, float closest_so_far, t_hit *hit, t_sp *sp)
+int	hit_sp(t_ray **ray, float closest_so_far, t_hit **hit, t_sp *sp)
 {
 	t_hit_sp	*hit_sp;
 
@@ -75,13 +75,13 @@ int	hit_sp(t_ray *ray, float closest_so_far, t_hit *hit, t_sp *sp)
 	if (hit_sp == NULL)
 		return (0);
 	hit_sp->closest = closest_so_far;
-	hit_sp->test = ray->v1;
+	hit_sp->test = (*ray)->v1;
 	hit_sp->oc = vec_minus_vec(hit_sp->test, sp->cor);
-	hit_sp->a = dot_vector(ray->v2, ray->v2);
-	hit_sp->b = dot_vector(hit_sp->oc, ray->v2);
+	hit_sp->a = dot_vector((*ray)->v2, (*ray)->v2);
+	hit_sp->b = dot_vector(hit_sp->oc, (*ray)->v2);
 	hit_sp->c = dot_vector(hit_sp->oc, hit_sp->oc) - pow(sp->diameter / 2, 2);
 	hit_sp->disc = pow(hit_sp->b, 2) - hit_sp->a * hit_sp->c;
 	if (hit_sp->disc > 0.0)
-		return (c_sp(&hit, &hit_sp, sp, ray));
+		return (c_sp(hit, &hit_sp, sp, ray));
 	return (0);
 }

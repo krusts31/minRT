@@ -97,7 +97,7 @@ t_ray	*get_ray(float u, float v, t_cameraP *cam)
 		exit(!printf(ERROR_8));
 	fin = vec_plus_vec(sum_lower_hor, tmp3);
 	if (fin == NULL)
-		return (NULL);
+		exit(!printf("Error\nvec_plus_vec failed on file cCore.c\n"));
 	free(sum_lower_hor);
 	free(tmp3);
 	return (free_get_ray(cam->cor, fin, &tmp1, &tmp));

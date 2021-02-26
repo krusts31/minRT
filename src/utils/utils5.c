@@ -1,19 +1,22 @@
 #include "minRT.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 
-t_vec	*color_else2(t_col_var **var, t_vec **holding, int *iter)
+t_vec	*color_else2(t_col_var **var, t_vec **holding, int *iter, t_draw **draw)
 {
 	free((*var)->new1);
 	(*var)->new1 = (*var)->tmp;
 	(*var)->ret = vec_plus_vec((*var)->new, (*var)->new1);
 	if ((*var)->ret == NULL)
-		return (NULL);
+		exit(!printf("Error\nOut of mem vec_plus_vec()!\n"));
 	free((*var)->hit);
 	free((*var)->new);
 	free((*var)->new1);
 	while (*iter > 0)
 	{
+		(void)draw;
+//		*holding = vec_times_vec((*var)->ret, (*draw)->col);
 		*holding = vec_times_num((*var)->ret, 0.5);
 		free((*var)->ret);
 		(*var)->ret = *holding;
@@ -22,45 +25,47 @@ t_vec	*color_else2(t_col_var **var, t_vec **holding, int *iter)
 	return ((*var)->ret);
 }
 
-t_vec	*c_e(t_col_var **var, t_vec **holding, int *iter, t_ray **ray)
+t_vec	*c_e(t_col_var **var, t_vec **holding, int *iter, t_draw **draw)
 {
-	(*var)->unit_dir = unit_vec((*ray)->v2);
+	(*var)->unit_dir = unit_vec(((*draw)->ray)->v2);
 	(*var)->t = 0.5 * ((*var)->unit_dir->e[1] + 1.0);
 	(*var)->new = new_vector(1.0, 1.0, 1.0);
 	if ((*var)->new == NULL)
-		return (NULL);
+		exit(!printf("Error\nOut of mem new_vector()!\n"));
 	(*var)->new1 = new_vector(0.5, 0.7, 1.0);
 	if ((*var)->new1 == NULL)
-		return (NULL);
+		exit(!printf("Error\nOut of mem new_vector()!\n"));
 	(*var)->tmp = vec_times_num((*var)->new, (1.0 - (*var)->t));
 	if ((*var)->tmp == NULL)
-		return (NULL);
+		exit(!printf("Error\nOut of mem vet_times_num()!\n"));
 	free((*var)->new);
 	(*var)->new = (*var)->tmp;
 	(*var)->tmp = vec_times_num((*var)->new1, (*var)->t);
 	if ((*var)->tmp == NULL)
-		return (NULL);
-	return (color_else2(var, holding, iter));
+		exit(!printf("Error\nOut of mem vet_times_num()!\n"));
+	return (color_else2(var, holding, iter, draw));
 }
 
 int	is_hit(t_col_var **var, t_ray **ray, int *iter)
 {
+	t_vec	*tmp;
+
 	(*var)->new = vec_plus_vec((*var)->hit->normal, (*var)->hit->p);
 	if ((*var)->new == NULL)
-		return (0);
-	(*var)->random = vec_plus_vec((*var)->new, rand_in_unit_sphere());
+		exit(!printf("Error\nOut of mem vec_plus_vec()!\n"));
+	tmp = rand_in_unit_sphere();
+	if (tmp == NULL)
+		exit(!printf("Error\nOut of mem rand_in_unit_sphere()!\n"));
+	(*var)->random = vec_plus_vec((*var)->new, tmp);
 	free((*var)->new);
+	free(tmp);
 	if ((*var)->random == NULL)
-		return (0);
+		exit(!printf("Error\nOut of mem vec_plus_vec()!\n"));
 	(*var)->some_vec = vec_minus_vec((*var)->random, (*var)->hit->p);
 	free((*var)->random);
 	(*var)->new_r = new_ray((*var)->hit->p, (*var)->some_vec);
 	if ((*var)->new_r == NULL)
-	{
-		free((*var)->hit);
-		free((*var)->new);
-		return (0);
-	}
+		exit(!printf("Error\nOut of mem new_ray()!\n"));
 	(*ray) = (*var)->new_r;
 	free((*var)->hit);
 	free((*var));

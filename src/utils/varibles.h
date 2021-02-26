@@ -37,6 +37,7 @@ typedef struct s_hit
 	float	t;
 	t_vec	*p;
 	t_vec	*normal;
+	t_vec	*color;
 }			t_hit;
 
 typedef struct s_sphere_difuse_var
