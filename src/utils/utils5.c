@@ -51,8 +51,6 @@ int	is_hit(t_col_var **var, t_ray **ray, int *iter)
 	t_vec	*tmp;
 
 	(*var)->new = vec_plus_vec((*var)->hit->normal, (*var)->hit->p);
-	if ((*var)->new == NULL)
-		exit(!printf("Error\nOut of mem vec_plus_vec()!\n"));
 	tmp = rand_in_unit_sphere();
 	if (tmp == NULL)
 		exit(!printf("Error\nOut of mem rand_in_unit_sphere()!\n"));
@@ -78,4 +76,16 @@ int	free_task_draw(t_task **task, t_draw **draw, int ret)
 	free_task(task);
 	free_draw(draw);
 	return (ret);
+}
+
+void	ft_init_mlx(t_data **d, t_task **t)
+{
+	(*d)->mlx = mlx_init();
+	if ((*d)->mlx == NULL)
+		exit(!(printf("Error\nutils5.c:88")));
+	(*d)->mlx_win = mlx_new_window((*d)->mlx, (*t)->X_res, (*t)->Y_res, "MINIRT");
+	if ((*d)->mlx_win == NULL)
+		exit(!(printf("Error\nutils5.c:91")));
+	(*d)->img = mlx_new_image((*d)->mlx, (*t)->X_res, (*t)->Y_res);
+	(*d)->addr = mlx_get_data_addr((*d)->img, &((*d)->bits_per_pixel), &(*d)->line_length, &(*d)->endian);
 }

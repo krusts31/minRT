@@ -90,6 +90,7 @@ int	new_task(int argc, char **argv, t_task **task)
 		exit(!printf(ERROR_2));
 	if (!parce_argv_1(argv[1]))
 		exit(!printf(ERROR_3));
+	
 	init(task, &vars);
 	vars->fd = open(argv[1], O_RDONLY);
 	if (vars->fd == -1)

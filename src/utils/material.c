@@ -23,3 +23,10 @@ int	scatter(t_hit **rec, t_ray **scatt, t_vec **att)
 	(*att) = (*rec)->color;
 	return (1);
 }
+
+/*
+int	diffuse_light()
+{
+	return ();
+}
+*/

@@ -30,7 +30,7 @@ char	free_task(t_task **task)
 	return (-1);
 }
 
-char	init_task(t_task **task)
+void	init_task(t_task **task)
 {
 	(*task)->sq = NULL;
 	(*task)->pl = NULL;
@@ -40,16 +40,12 @@ char	init_task(t_task **task)
 	(*task)->light = NULL;
 	(*task)->Amb_light = NULL;
 	(*task)->camera = NULL;
+	(*task)->curent = 0;
+	(*task)->save = 0;
 	(*task)->Amb_light = malloc(sizeof(t_amb_light) * 1);
 	if ((*task)->Amb_light == NULL)
-		return (0);
+		exit(!printf("Error\nutils4.c:44\n"));
 	(*task)->Amb_light->col = new_vector_uc(0, 0, 0);
-	if ((*task)->Amb_light->col == NULL)
-	{
-		free((*task)->Amb_light);
-		return (0);
-	}
-	return (1);
 }
 
 void	init(t_task **task, t_pars_vars **vars)
@@ -65,8 +61,7 @@ void	init(t_task **task, t_pars_vars **vars)
 	(*vars)->ret = 1;
 	(*vars)->i = 0;
 	(*vars)->fd = 0;
-	if (!init_task(task))
-		exit(!printf("Error\nOut of memmory init\n"));
+	init_task(task);
 }
 
 void	free_camera(t_task **task)

@@ -10,12 +10,12 @@ char	ft_calc_sphere2(t_hit **hit, float temp, t_sp *sp, t_ray **ray)
 	(*hit)->t = temp;
 	(*hit)->p = point_at_param((*ray), (*hit)->t);
 	(*hit)->normal = vec_minus_vec((*hit)->p, sp->cor);
-	(*hit)->color->e[0] = sp->col->e[0] / 255.99;
-	(*hit)->color->e[1] = sp->col->e[1] / 255.99;
-	(*hit)->color->e[2] = sp->col->e[2] / 255.99;
 	tmp = vec_div_num((*hit)->normal, sp->diameter / 2);
 	free((*hit)->normal);
 	(*hit)->normal = tmp;
+	(*hit)->color->e[0] = sp->col->e[0] / 255.99;
+	(*hit)->color->e[1] = sp->col->e[1] / 255.99;
+	(*hit)->color->e[2] = sp->col->e[2] / 255.99;
 	return (1);
 }
 
@@ -32,10 +32,10 @@ char	c_sp(t_hit **hit, t_hit_sp **hit_sp, t_sp *sp, t_ray **ray)
 		(*hit)->normal = vec_minus_vec((*hit)->p, sp->cor);
 		tmp = vec_div_num((*hit)->normal, sp->diameter / 2);
 		free((*hit)->normal);
+		(*hit)->normal = tmp;
 		(*hit)->color->e[0] = sp->col->e[0] / 255.99;
 		(*hit)->color->e[1] = sp->col->e[1] / 255.99;
 		(*hit)->color->e[2] = sp->col->e[2] / 255.99;
-		(*hit)->normal = tmp;
 		return (1);
 	}
 	temp = - ((*hit_sp)->b) + sqrt((*hit_sp)->disc) / (*hit_sp)->a;

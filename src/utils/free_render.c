@@ -1,11 +1,12 @@
 #include "minRT.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 int	init_draw(t_draw **draw, int xs, int ys, int ns)
 {
 	*draw = malloc(sizeof(t_draw) * 1);
 	if (*draw == NULL)
-		return (0);
+		exit(!printf("Error\nfree_render.c line 7\n"));
 	(*draw)->ray = NULL;
 	(*draw)->p = NULL;
 	(*draw)->temp = NULL;
@@ -37,7 +38,7 @@ int	init_col_var(t_col_var **var)
 {
 	(*var) = malloc(sizeof(t_col_var) * 1);
 	if (*var == NULL)
-		return (-1);
+		exit(!printf("Error\nfree_render.c line 39\n"));
 	(*var)->hit = NULL;
 	(*var)->unit_dir = NULL;
 	(*var)->t = 0.0;

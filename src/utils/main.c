@@ -1,7 +1,6 @@
 #include "minRT.h"
 #include "parcer.h"
 #include "error.h"
-#include <stdlib.h>
 #include <math.h>
 #include <limits.h>
 #include <stdio.h>
@@ -9,66 +8,33 @@
 t_vec	*color(t_ray **ray, t_task **task, int depth)
 {
 	t_col_var	*var;
-//	int		iter;
-	t_vec		*att;
-	t_ray		*scatt;
-	t_vec		*unit;
-	float		t;
-//	iter = 0;
-//	while (1)
-//	{
-		if (!init_col_var(&var))
-			return (NULL);
-		var->hit = malloc(sizeof(t_hit) * 1);
-		if (var->hit == NULL)
-			return (NULL);
-		if (hitable_list(ray, INT_MAX, &var->hit, (*task)->sp))
-		{
-			if (depth < 50 && scatter(&var->hit, &scatt, &att))
-			{
-				depth++;
-				return (vec_times_vec(att, color(&scatt, task, depth)));
-			}
-			else
-				return (new_vector(0, 0, 0));
-		}
-		else
-		{
-			unit = unit_vec((*ray)->v2);
-			t = 0.5 * (unit->e[1] + 1.0);
-			return (vec_plus_vec(vec_times_num(new_vector(1, 1, 1), 1.0 - t), vec_times_num(new_vector(0.5, 0.7, 1.0), t)));
-		}
-//			is_hit(&var, &(*draw)->ray, &iter);
-//		else
-//			return (c_e(&var, &holding, &iter, draw));
-//	}
+
+	(void)depth;
+	init_col_var(&var);
+	var->hit = malloc(sizeof(t_hit) * 1);
+	if (var->hit == NULL)
+		exit(!printf("Error\nmain.c:15\n"));
+	if (hitable_list(ray, INT_MAX, &var->hit, task))
+		return (var->hit->color);
+	return (new_vector(0, 0, 0));
 }
 
-static int	draw_back_ground(t_data *img, t_task **task)
+int		draw_back_ground(void *img, t_task **task)
 {
-	t_draw	*draw;
+	t_draw		*draw;
 
-	if(!init_draw(&draw, (*task)->X_res, (*task)->Y_res, 15))
-		return (free_task_draw(task, &draw, 0));
+	init_draw(&draw, (*task)->X_res, (*task)->Y_res, 5);
 	for (int j = draw->y - 1; j >= 0; j--)
 	{
 		for (int i = 0; i < draw->x; i++)
 		{
 			draw->col = new_vector(0.0, 0.0, 0.0);
-			if (draw->col == NULL)
-				exit(!printf("Error\nOut of mem main.c new_v\n"));
 			draw->col = get_color(task, &draw, i, j);
-			if (draw->col == NULL)
-				exit(!printf("Error\nOut of mem main.c g_col\n"));
 			draw->temp = vec_div_num(draw->col, (float)draw->n); 
-			if (draw->temp == NULL)
-				exit(!printf(ERROR_9));
 			free(draw->col);
 			draw->col = draw->temp;
 			draw->temp = NULL;
 			draw->new_col = new_vector(sqrt(draw->col->e[0]), sqrt(draw->col->e[1]), sqrt(draw->col->e[2]));
-			if (draw->new_col == NULL)
-				exit(!printf("Error\nOut of mem main.c new_vl\n"));
 			draw->ir = (int)255.99 * draw->new_col->e[0];
 			draw->ig = (int)255.99 * draw->new_col->e[1];
 			draw->ib = (int)255.99 * draw->new_col->e[2];
@@ -80,31 +46,52 @@ static int	draw_back_ground(t_data *img, t_task **task)
 			draw->col = NULL;
 		}
 	}
-	return (free_task_draw(task, &draw, 1));
+//	return (free_task_draw(task, &draw, 1));
+	return (0);
 }
+
+/*
+**	I have implemented
+**		sp
+**		lights
+**	I can try to work on trinalges
+**	I can work on the --save feature
+**	Fix memmory leaks
+**	Norm
+**int     mlx_get_screen_size(void *mlx_ptr, int *sizex, int *sizey);
+*/
+
 
 int     main(int argc, char **argv)
 {
-	void		*mlx;
-	void		*mlx_win;
-	t_data		img;
-	t_task		*task;
+	t_data		*data;
+	int		x;
+	int		y;
 
-	if (!new_task(argc, argv, &task))
-		return (-1);
-	if (task == NULL)
-		return (-1);
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, task->X_res, task->Y_res, "HELLO WOLRD!");
-	img.img = mlx_new_image(mlx, task->X_res, task->Y_res);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-
-	if (!draw_back_ground(&img, &task))
+	x = 0;
+	y = 0;
+	data = malloc(sizeof(t_data) * 1);
+	if (data == NULL)
+		exit(!printf("Error\nmain.c:80\n"));
+	new_task(argc, argv, &data->task);
+	ft_init_mlx(&data, &data->task);
+	mlx_get_screen_size(&data->mlx, &x, &y);
+	if (x <= 0 || y <= 0)
+		exit(!printf("Error\nRes of screem broken!\n"));
+	if (((size_t)x < data->task->X_res) || ((size_t)x < data->task->X_res))
 	{
-		printf("Error\nFaield to create image!");
-		return (-1);
+		if ((size_t)x < data->task->X_res)
+			data->task->X_res = x / 4;
+		if ((size_t)y < data->task->Y_res)
+			data->task->Y_res = y / 4;
+		mlx_destroy_image(data->mlx, data->img);
+		mlx_destroy_window(data->mlx, data->mlx_win);
+		ft_init_mlx(&data, &data->task);
 	}
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	draw_back_ground(&data->img, &data->task);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
+	mlx_hook(data->mlx_win, 2, 1L<<0, close_win, data);
+	mlx_hook(data->mlx_win, 17, 1L<<13, close_red, data);
+	mlx_loop(data->mlx);
 	return (0);
 }

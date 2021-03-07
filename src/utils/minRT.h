@@ -82,7 +82,7 @@ int				ft_hex2(t_data *img, int x, int y, int size);
 **		SPHERE
 */
 
-int				hitable_list(t_ray **ray, float closest_so_far, t_hit **hit, t_sp *sp);
+int				hitable_list(t_ray **ray, float closest_so_far, t_hit **hit, t_task **task);
 int				hit_sp(t_ray **ray, float close, t_hit **hit, t_sp *sp);
 char			c_sp(t_hit **hit, t_hit_sp **hit_sp, t_sp *sp, t_ray **ray);
 char			ft_calc_sphere2(t_hit **hit, float temp, t_sp *sp, t_ray **ray);
@@ -109,4 +109,15 @@ t_vec			*color_else2(t_col_var **var, t_vec **holding, int *iter, t_draw **draw)
 t_vec			*c_e(t_col_var **var, t_vec **h, int *iter, t_draw **ray);
 int				free_task_draw(t_task **task, t_draw **draw, int ret);
 int				scatter(t_hit **rec, t_ray **scatt, t_vec **att);
+int				sp_light(t_hit **hit, t_task **task, t_sp *sp);
+int				in_shade(t_light *light, t_task **task, t_sp *curent, t_hit **hit);
+int				sp_shade(t_light *light, t_sp *sp, t_sp *curent, t_hit **hit);
+char			c_sp_sh(t_hit_sp **hit_sp, t_hit **hit, t_ray **ray, t_sp *sp);
+int				hit_sp_sh(t_ray **ray, float closest_so_far, t_sp *sp, t_hit **hit);
+int				close_win(int key, t_data *d);
+int				move_camera(int key, void *curent);
+void			ft_init_mlx(t_data **d, t_task **t);
+int				ft_camera_size(t_cameraP *cam);
+int				draw_back_ground(void *img, t_task **task);
+int				close_red(t_data *d);
 #endif

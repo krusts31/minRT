@@ -1,5 +1,7 @@
 #include "minRT.h"
+
 #include <stdlib.h>
+#include <stdio.h>
 
 t_vec	*vec_times_num(t_vec *v1, float num)
 {
@@ -7,7 +9,7 @@ t_vec	*vec_times_num(t_vec *v1, float num)
 
 	new = malloc(sizeof(t_vec) * 1);
 	if (new == NULL)
-		return (NULL);
+		exit(!printf("Error\nvector_1.c:10\n"));
 	new->e[0] = v1->e[0] * num;
 	new->e[1] = v1->e[1] * num;
 	new->e[2] = v1->e[2] * num;
@@ -20,7 +22,7 @@ t_vec	*new_vector(float num1, float num2, float num3)
 
 	new = malloc(sizeof(t_vec) * 1);
 	if (new == NULL)
-		return (NULL);
+		exit(!printf("Error\nvector_1.c:23\n"));
 	new->e[0] = num1;
 	new->e[1] = num2;
 	new->e[2] = num3;
@@ -33,7 +35,7 @@ t_vec	*vec_div_vec(t_vec *v1, t_vec *v2)
 
 	new = malloc(sizeof(t_vec) * 1);
 	if (new == NULL)
-		return (NULL);
+		exit(!printf("Error\nvector_1.c:37\n"));
 	new->e[0] = v1->e[0] / v2->e[0];
 	new->e[1] = v1->e[1] / v2->e[1];
 	new->e[2] = v1->e[2] / v2->e[2];
@@ -46,7 +48,7 @@ t_vec	*vec_div_num(t_vec *v1, float num)
 
 	new = malloc(sizeof(t_vec) * 1);
 	if (new == NULL)
-		return (NULL);
+		exit(!printf("Error\nvector_1.c:51\n"));
 	new->e[0] = v1->e[0] / num;
 	new->e[1] = v1->e[1] / num;
 	new->e[2] = v1->e[2] / num;
@@ -59,6 +61,6 @@ t_vec	*unit_vec(t_vec *v)
 
 	ret = vec_div_num(v, length_of_vector(v));
 	if (ret == NULL)
-		return (NULL);
+		exit(!printf("Error\nvector_1.c:65\n"));
 	return (ret);
 }

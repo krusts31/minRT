@@ -1,6 +1,7 @@
 #include "minRT.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <math.h>
 
 float	length_of_vector(t_vec *s)
@@ -14,7 +15,7 @@ t_vec	*cross_vector(t_vec *v1, t_vec *v2)
 
 	new = malloc(sizeof(t_vec) * 1);
 	if (new == NULL)
-		return (0);
+		exit(!printf("Error\vector.c:16\n"));
 	new->e[0] = (v1->e[1] * v2->e[2] - v1->e[2] * v2->e[1]);
 	new->e[1] = - (v1->e[0] * v2->e[2] - v1->e[2] * v2->e[0]);
 	new->e[2] = (v1->e[0] * v2->e[1] - v1->e[1] * v2->e[0]);
@@ -32,7 +33,7 @@ t_vec	*vec_plus_vec(t_vec *v1, t_vec *v2)
 
 	new = malloc(sizeof(t_vec) * 1);
 	if (new == NULL)
-		return (0);
+		exit(!printf("Error\vector.c:34\n"));
 	new->e[0] = (v1->e[0] + v2->e[0]);
 	new->e[1] = (v1->e[1] + v2->e[1]);
 	new->e[2] = (v1->e[2] + v2->e[2]);
@@ -45,7 +46,7 @@ t_vec	*vec_plus_num(t_vec *v1, float num)
 
 	new = malloc(sizeof(t_vec) * 1);
 	if (new == NULL)
-		return (0);
+		exit(!printf("Error\vector.c:49\n"));
 	new->e[0] = (v1->e[0] + num);
 	new->e[1] = (v1->e[1] + num);
 	new->e[2] = (v1->e[2] + num);

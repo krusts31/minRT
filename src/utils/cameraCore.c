@@ -69,13 +69,11 @@ t_image_plane	*new_image_plane(float FOV, float portion, t_cameraP *camera)
 	return (new);
 }
 
-static t_ray	*free_get_ray(t_vec *cor, t_vec *fin, t_vec **tmp1, t_vec **tmp)
+static t_ray	*free_get_ray(t_vec *cor, t_vec **fin)
 {
 	t_ray	*ray;
 
-	free(*tmp1);
-	free(*tmp);
-	ray = new_ray(cor, fin);
+	ray = new_ray(cor, (*fin));
 	return (ray);
 }
 
@@ -89,16 +87,12 @@ t_ray	*get_ray(float u, float v, t_cameraP *cam)
 
 	tmp = vec_times_num(cam->image->horizontal, u);
 	tmp1 = vec_times_num(cam->image->vertical, v);
-	if (tmp1 == NULL || tmp == NULL)
-		exit(!printf(ERROR_8));
 	sum_lower_hor = vec_plus_vec(cam->image->upper_left, tmp);
 	tmp3 = vec_minus_vec(tmp1, cam->cor);
-	if (tmp3 == NULL || sum_lower_hor == NULL)
-		exit(!printf(ERROR_8));
 	fin = vec_plus_vec(sum_lower_hor, tmp3);
-	if (fin == NULL)
-		exit(!printf("Error\nvec_plus_vec failed on file cCore.c\n"));
 	free(sum_lower_hor);
 	free(tmp3);
-	return (free_get_ray(cam->cor, fin, &tmp1, &tmp));
+	free(tmp);
+	free(tmp1);
+	return (free_get_ray(cam->cor, &fin));
 }

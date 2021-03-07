@@ -2,14 +2,6 @@
 # define VARIBLES_H
 # include <stddef.h>
 
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_data;
 
 typedef struct s_vec
 {
@@ -218,6 +210,7 @@ typedef struct s_task
 	t_tr		*tr;
 	t_light		*light;
 	t_cameraP	*camera;
+	int		curent;
 	char		save;
 }			t_task;
 
@@ -240,5 +233,17 @@ typedef struct s_hit_sp
 	t_vec		*test;
 	t_vec		*oc;
 }			t_hit_sp;
+
+typedef struct s_data
+{
+	void	*img;
+	void	*mlx;
+	void	*mlx_win;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	t_task	*task;
+}			t_data;
 
 #endif

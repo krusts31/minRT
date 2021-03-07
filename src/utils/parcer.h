@@ -24,7 +24,7 @@ size_t		ft_size_t_len(size_t nr);
 int			argc_error(char *str);
 void		free_sq(t_task **task);
 void		init(t_task **task, t_pars_vars **vars);
-char		init_task(t_task **task);
+void		init_task(t_task **task);
 void		error_con(t_pars_vars **vars, t_task **task);
 short		error(t_pars_vars **vars, short ret, t_task **task);
 char		char_parce(unsigned char *col, t_pars_vars **vars);
